@@ -26,7 +26,7 @@ public class Helloworld {
     public List<Resource> getAllResource(){
         return resourceInterface.getAllUrl();
     }
-    @RequestMapping("/error2")
+    @RequestMapping("/admin/adduser")
     public String addUser(){
         User user=new User();
         user.setId(UUID.randomUUID().toString());
