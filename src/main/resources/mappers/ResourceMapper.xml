@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.repository.ResourceInterface">
+    <!-- 查出所有资源路径及对应的角色和用户 -->
+    <resultMap id="UrlResultMap" type="com.entity.Resource">
+        <id property="id" column="id" />
+        <result property="url" column="url"></result>
+        <collection property="roles" ofType="com.entity.Role">
+            <id column="rid" property="id"/>
+            <result column="rname" property="name" />
+        </collection>
+    </resultMap>
+    <select id="getAllUrl" resultMap="UrlResultMap">
+        select re.*, ro.id as rid, ro.name as rname from sys_resource re left join sys_role_resource rr on re.`id`=rr.`resource_id` left join sys_role ro on ro.`id`=rr.`role_id`
+    </select>
+
+    <!-- 查找所有资源路径
+    <select id="getAllUrl" resultType="com.entity.Resource">
+        select url from sys_resource
+    </select>-->
+
+    <select id="getResourceByRoleId" resultType="com.entity.Resource">
+        select rsc.url from sys_resource rsc, sys_role_resource rr where rsc.`id`=rr.`resource_id` and rr.`role_id`=#{roleId}
+    </select>
+</mapper>

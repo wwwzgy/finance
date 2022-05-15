@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.repository.MenuInterface">
+    <!--根据角色id获得菜单-->
+    <select id="getMenuByRoleId" resultType="com.entity.Menu">
+        select mn.name from sys_menu mn, sys_role_menu rm where mn.`id`=rm.`menu_id` and rm.`role_id`=#{RoleId}
+    </select>
+</mapper>
